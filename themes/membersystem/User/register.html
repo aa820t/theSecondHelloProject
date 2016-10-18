@@ -1,107 +1,75 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>{$site_name}</title>
-<meta name="keywords" content="{$site_seo_keywords}" />
-<meta name="description" content="{$site_seo_description}">
-<meta name="author" content="ThinkCMF">
-<tc_include file="Public:head" />
+<head lang="en">
+	<title>{$site_name}</title>
+	<meta name="keywords" content="{$site_seo_keywords}" />
+	<meta name="description" content="{$site_seo_description}">
+	<tc_include file="Public:head"/>
+	<style>
+		.header {
+			text-align: center;
+		}
+
+		.header h1 {
+			font-size: 150%;
+			color: #333;
+			margin-top: 1.5rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.am-form input[type="text"]:after,
+		.am-form input[type="password"]:after{
+			clear: both;
+			margin-bottom: 1rem;
+		}
+
+		input{
+			border-radius: 5px;
+		}
+	</style>
 </head>
-
-<body class="body-white">
-	<tc_include file="Public:nav" />
-
-	<div class="container tc-main">
-		<div class="row">
-			<div class="span4 offset4">
-				<h2 class="text-center">用户注册</h2>
-				<!-- <ul class="nav nav-tabs" id="myTab">
-					<li class="active"><a href="#mobile" data-toggle="tab">手机注册</a></li>
-					<li><a href="#email" data-toggle="tab">邮箱注册</a></li>
-				</ul> -->
-
-				<div class="tab-content">
-					<div class="tab-pane" id="mobile">
-						<form class="form-horizontal js-ajax-form" action="{:U('user/register/doregister')}" method="post">
-		
-							<div class="control-group">
-								<input type="text" name="mobile" placeholder="手机号" class="span4">
-							</div>
-		
-							<div class="control-group">
-								<input type="password" name="password" placeholder="密码" class="span4">
-							</div>
-							
-							<div class="control-group">
-								<div class="span4" style="margin-left: 0px;">
-									<input type="text" name="verify" placeholder="验证码" style="width:232px;">
-									{:sp_verifycode_img('length=4&font_size=14&width=120&height=34&charset=1234567890&use_noise=1&use_curve=0')}
-								</div>
-							</div>
-		
-							<div class="control-group">
-								<div class="span4" style="margin-left: 0px;">
-									<input type="text" name="mobile_verify" placeholder="手机验证码" style="width:232px;">
-									<a class="btn btn-success" style="width: 96px;">获取验证码</a>
-								</div>
-							</div>
-		
-							<div class="control-group">
-								<button class="btn btn-primary js-ajax-submit span4" type="submit" data-wait="1500" style="margin-left: 0px;">确定注册</button>
-							</div>
-		
-							<div class="control-group" style="text-align: center;">
-								<p>
-									已有账号? <a href="{:leuu('user/login/index')}">点击此处登录</a>
-								</p>
-							</div>
-						</form>
-					</div>
-					<div class="tab-pane active" id="email">
-						<form class="form-horizontal js-ajax-form" action="{:U('user/register/doregister')}" method="post">
-		
-							<div class="control-group">
-								<input type="text" name="email" placeholder="邮箱" class="span4">
-							</div>
-		
-							<div class="control-group">
-								<input type="password" name="password" placeholder="密码" class="span4">
-							</div>
-							
-							<div class="control-group">
-								<input type="password" name="repassword" placeholder="重复密码" class="span4">
-							</div>
-		
-							<div class="control-group">
-								<div class="span4" style="margin-left: 0px;">
-									<input type="text" name="verify" placeholder="验证码" style="width:252px;">
-									{:sp_verifycode_img('length=4&font_size=14&width=100&height=34&charset=1234567890&use_noise=1&use_curve=0')}
-								</div>
-								
-							</div>
-		
-							<div class="control-group">
-								<button class="btn btn-primary js-ajax-submit span4" type="submit" data-wait="1500" style="margin-left: 0px;">确定注册</button>
-							</div>
-		
-							<div class="control-group" style="text-align: center;">
-								<p>
-									已有账号? <a href="{:leuu('user/login/index')}">点击此处登录</a>
-								</p>
-							</div>
-						</form>
-					
-					</div>
-				</div>
-				
-			</div>
-		</div>
-
-		<tc_include file="Public:footer" />
-
+<body>
+<div class="header">
+	<div class="am-g">
+		<h1>会员注册</h1>
 	</div>
-	<!-- /container -->
+	<hr/>
+</div>
+<div class="am-g">
+	<div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+		<form method="post" class="am-form" action="">
+			<label for="input_username">用户名:</label>
+			<input class="am-margin-bottom-sm" type="text" name="username" id="input_username" value="" placeholder="请输入手机号/邮箱/用户名/微信号">
 
-	<tc_include file="Public:scripts" />
+			<label for="input_password">账号类型:</label>
+			<div class="am-margin-bottom-sm">
+				<select data-am-selected name="user_type">
+					<option value="normal" selected>普通账号</option>
+					<option value="mobile" >手机号</option>
+					<option value="weixin">微信号</option>
+					<option value="email">邮箱号</option>
+				</select>
+			</div>
+
+			<label for="input_password">密码:</label>
+			<input class="am-margin-bottom-sm" type="password" name="" id="input_password" value="" placeholder="请输入密码">
+
+			<label for="input_password">重复密码:</label>
+			<input class="am-margin-bottom-sm" type="password" name="" id="input_confirm_password" value="" placeholder="请重复输入密码">
+
+			<label for="input_verify">验证码:</label>
+			<input type="text" name="verify" id="input_verify" value="" placeholder="请输入验证码">
+			<div class="am-margin-top-xs">
+				{:sp_verifycode_img('length=4&font_size=20&width=150&height=40&charset=&use_noise=1&use_curve=0')}
+			</div>
+
+			<div class="am-cf am-margin-top ">
+				<input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+				<!--<input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">-->
+			</div>
+		</form>
+	</div>
+</div>
+<tc_include file="Public:footer" />
 </body>
 </html>
