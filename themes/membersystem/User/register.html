@@ -23,8 +23,12 @@
 			margin-bottom: 1rem;
 		}
 
-		input{
-			border-radius: 5px;
+		label.am-radio{
+			display: inline;
+			margin-left: 5px;
+		}
+		label.am-radio:first-child{
+			margin-left: 0;
 		}
 	</style>
 </head>
@@ -43,33 +47,79 @@
 
 			<label for="input_password">账号类型:</label>
 			<div class="am-margin-bottom-sm">
-				<select data-am-selected name="user_type">
-					<option value="normal" selected>普通账号</option>
-					<option value="mobile" >手机号</option>
-					<option value="weixin">微信号</option>
-					<option value="email">邮箱号</option>
-				</select>
+				<label class="am-radio">
+					<input type="radio" name="radio" value="normal" data-am-ucheck checked>
+					普通账号
+				</label>
+				<label class="am-radio">
+					<input type="radio" name="radio" value="mobile" data-am-ucheck>
+					手机号
+				</label>
+				<label class="am-radio">
+					<input type="radio" name="radio" value="weixin" data-am-ucheck>
+					微信号
+				</label>
+				<label class="am-radio">
+					<input type="radio" name="radio" value="email" data-am-ucheck>
+					邮箱号
+				</label>
 			</div>
 
 			<label for="input_password">密码:</label>
-			<input class="am-margin-bottom-sm" type="password" name="" id="input_password" value="" placeholder="请输入密码">
+			<input class="am-margin-bottom-sm" type="password" name="password" id="input_password" value="" placeholder="请输入密码">
 
-			<label for="input_password">重复密码:</label>
-			<input class="am-margin-bottom-sm" type="password" name="" id="input_confirm_password" value="" placeholder="请重复输入密码">
+			<label for="input_password">确认密码:</label>
+			<input class="am-margin-bottom-sm" type="password" name="confirm_password" id="input_confirm_password" value="" placeholder="请输入确认密码">
 
 			<label for="input_verify">验证码:</label>
-			<input type="text" name="verify" id="input_verify" value="" placeholder="请输入验证码">
+			<input  type="text" name="verify_code"   id="input_verify" placeholder="请输入验证码">
 			<div class="am-margin-top-xs">
 				{:sp_verifycode_img('length=4&font_size=20&width=150&height=40&charset=&use_noise=1&use_curve=0')}
 			</div>
 
 			<div class="am-cf am-margin-top ">
-				<input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
-				<!--<input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">-->
+				<input type="submit" name="" value="注 册" class="am-btn am-btn-primary am-btn-sm am-fl" onclick="return doformcheck()">
+				<a href={:leuu('user/login/index')}" class="am-btn am-btn-default am-btn-sm am-fr">已有密码,立即登录</a>
 			</div>
 		</form>
 	</div>
 </div>
 <tc_include file="Public:footer" />
+<script type="text/javascript">
+	function doformcheck() {
+		if (!$('#input_username').val().match(/^[a-zA-Z]{1}[0-9a-zA-Z_]{2,15}$/)) {
+			layer.msg('请输入登录帐号!<br/>3-16字母开头的字母数字下划线组成', {icon: 2});
+			$('#input_username').focus();
+			return false;
+		}
+		if (!$('#input_password').val().match(/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,16}$/)) {
+			layer.msg('请输入登录密码<br/>6-16字母数字或(#$%!^&*.~)', {icon: 2});
+			$('#input_password').focus();
+			return false;
+		}
+		if (!$('#input_confirm_password').val().match(/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,16}$/)) {
+			layer.msg('请输入登录密码<br/>6-16字母数字或(#$%!^&*.~)', {icon: 2});
+			$('#input_confirm_password').focus();
+			return false;
+		}
+		if ($('#input_password').val() != $('#input_confirm_password').val()) {
+			layer.msg('确认密码错误', {icon: 2});
+			$('#input_confirm_password').focus();
+			return false;
+		}
+//		if (!$('#email').val().match(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)) {
+//			layer.msg('请输入电子邮箱', {icon: 2});
+//			$('#email').focus();
+//			return false;
+//		}
+		if (!$('#input_verify').val().match(/^[a-zA-Z0-9]{4}$/)) {
+			layer.msg('请输入验证码', {icon: 2});
+			$('#input_verify').focus();
+			return false;
+		}
+		return true;
+	}
+
+</script>
 </body>
 </html>
