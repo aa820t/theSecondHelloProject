@@ -13,7 +13,8 @@ class LoginController extends HomebaseController {
 	        $redirect ? session('login_http_referer',$redirect):'';
 	    }
 	    if(sp_is_user_login()){ //已经登录时直接跳到首页
-	        redirect(__ROOT__."/");
+//	        redirect(__ROOT__."/");
+	        $this->redirect(U('user/center/index'));
 	    }else{
 	        $this->display(":login");
 	    }
@@ -367,7 +368,5 @@ hello;
         }else{
             $this->error("用户名不存在！");
         }
-        
-        
     }
 }
