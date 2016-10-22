@@ -1,9 +1,35 @@
-<div class="list-group">
-	<a class="list-group-item" href="{:U('user/profile/edit')}"><i class="fa fa-list-alt fa-fw"></i> 修改资料</a>
-	<a class="list-group-item" href="{:U('user/profile/password')}"><i class="fa fa-lock fa-fw"></i> 修改密码</a>
-	<a class="list-group-item" href="{:U('user/profile/avatar')}"><i class="fa fa-user fa-fw"></i> 编辑头像</a>
-	<a class="list-group-item" href="{:U('user/profile/bang')}"><i class="fa fa-exchange fa-fw"></i> 绑定账号</a>
-	<a class="list-group-item" href="{:U('user/favorite/index')}"><i class="fa fa-star-o fa-fw"></i> 我的收藏</a>
-	<a class="list-group-item" href="{:U('portal/user/articles')}"><i class="fa fa-file-text fa-fw"></i> 我的文章</a>
-	<a class="list-group-item" href="{:U('comment/comment/index')}"><i class="fa fa-comments-o fa-fw"></i> 我的评论</a>
-</div>
+<header class="am-topbar">
+	<h1 class="am-topbar-brand">
+		<a>个人中心</a>
+	</h1>
+
+	<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+			class="am-icon-bars"></span></button>
+
+	<div class=" am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+		<ul class="am-nav am-nav-pills am-topbar-nav">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">会员升级</a></li>
+			<li class="am-dropdown" data-am-dropdown>
+				<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+					设置 <span class="am-icon-caret-down"></span>
+				</a>
+				<ul class="am-dropdown-content">
+					<li><a href="{:U('user/profile/edit')}"><span class="am-icon-list-alt">&nbsp;&nbsp;</span>修改资料</a>
+					</li>
+					<li class="am-divider"></li>
+
+					<li><a href="{:U('user/profile/password')}"><span class="am-icon-lock">&nbsp;&nbsp;</span>修改密码</a></li>
+					<li class="am-divider"></li>
+
+					<li><a href="{:U('user/profile/avatar')}"><span class="am-icon-user">&nbsp;&nbsp;</span>编辑头像</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="am-topbar-right">
+			<a class="am-btn am-btn-default am-topbar-btn am-btn-sm" href="{:U('user/index/logout')}"><span class="am-icon-sign-out">&nbsp;</span>退出</a>
+		</div>
+	</div>
+</header>

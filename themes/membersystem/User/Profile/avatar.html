@@ -1,122 +1,121 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>{$site_name}</title>
-<meta name="keywords" content="{$site_seo_keywords}" />
-<meta name="description" content="{$site_seo_description}">
-<meta name="author" content="ThinkCMF">
-<tc_include file="Public:head" />
-<style type="text/css">
-.tab-content{overflow: visible;}
+<head lang="en">
+    <title>{$site_name}</title>
+    <meta name="keywords" content="{$site_seo_keywords}"/>
+    <meta name="description" content="{$site_seo_description}">
+    <tc_include file="Public:head"/>
+    <style>
+        .header {
+            text-align: center;
+        }
 
-.uploaded_avatar_area{
-	margin-top: 20px;
-}
-.uploaded_avatar_btns{
-	margin-top: 20px;
-}
-.uploaded_avatar_area .uploaded_avatar_btns{display: none;}
-</style>
+        .header h1 {
+            font-size: 150%;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .uploaded_avatar_area {
+            margin-top: 20px;
+        }
+        .uploaded_avatar_btns{
+            margin-top: 20px;
+        }
+
+    </style>
 </head>
-<body class="body-white" id="top">
-	<tc_include file="Public:nav" />
+<body>
+<tc_include file="Public:usernav"/>
+<div class="header">
+    <div class="am-g">
+        <h1>修改头像</h1>
+    </div>
+    <hr/>
+</div>
+<div class="am-g">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+        <if condition="empty($avatar)">
+            <img src="__TMPL__Public/assets/images/headicon_128.png" class="am-img-thumbnail am-radius" style="display: block;margin: 0 auto; width: 134px; height: 134px"/>
+            <else/>
+            <img src="{:sp_get_user_avatar_url($avatar)}?t={:time()}" class="am-img-thumbnail am-radius" style="display: block;margin: 0 auto; width: 134px; height: 134px"/>
+        </if>
 
-		<div class="container tc-main">
-                <div class="row">
-                    <div class="span3">
-	                    <tc_include file="Public:usernav"/>
-                    </div>
-                    <div class="span9">
-                           <div class="tabs">
-                               <ul class="nav nav-tabs">
-                                   <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-user"></i> 修改头像</a></li>
-                               </ul>
-                               <div class="tab-content">
-                                   <div class="tab-pane active" id="one">
-                                   		<if condition="empty($avatar)">
-							            	<img src="__TMPL__Public/assets/images/headicon_128.png" class="headicon"/>
-							            <else/>
-							            	<img src="{:sp_get_user_avatar_url($avatar)}?t={:time()}" class="headicon"/>
-							            </if>
-                                   		<input type="file" onchange="avatar_upload(this)" id="avatar_uploder"  name="file"/>
-                                   		<div class="uploaded_avatar_area">
-                                   		
-                                   		<div class="uploaded_avatar_btns">
-                                   			<a class="btn btn-primary confirm_avatar_btn" onclick="update_avatar()">确定</a>
-                                   			<a class="btn" onclick="reloadPage()">取消</a>
-                                   		</div>
-                                   		</div>
-                                   </div>
-                               </div>							
-                           </div>
-                    </div>
-                </div>
+        <div class="uploaded_avatar_area am-margin-top-sm">
+            <button class="am-btn am-btn-secondary am-center" id="btn-upfile">上传图片</button>
+            <input type="file" onchange="avatar_upload(this)" id="avatar_uploder" name="file" style="visibility: hidden;"/>
 
-		<tc_include file="Public:footer" />
+            <div class="uploaded_avatar_btns" style="display: table;margin: 0 auto">
+                <button class="am-btn am-btn-primary am-margin-horizontal-xs confirm_avatar_btn" onclick="update_avatar()">确定</button>
+                <button class="am-btn am-btn-default am-margin-horizontal-xs" onclick="reloadPage()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<tc_include file="Public:footer"/>
+<script type="text/javascript">
+    $(function(){
+        $('#btn-upfile').click(function () {
+            $('#avatar_uploder').trigger("click");
+            $('#btn-upfile').remove();
+            $(".uploaded_avatar_btns").css('margin-top','1rem');
+        });
+    });
 
-	</div>
-	<!-- /container -->
+    function update_avatar() {
+        var area = $(".uploaded_avatar_area img").data("area");
+        $.post("{:U('profile/avatar_update')}", area,
+                function (data) {
+                    if (data.status == 1) {
+                        reloadPage(window);
+                    }
 
-	<tc_include file="Public:scripts" />
-	<script type="text/javascript">
-	function update_avatar(){
-		var area=$(".uploaded_avatar_area img").data("area");
-		$.post("{:U('profile/avatar_update')}",area,
-				function(data){
-			if(data.status==1){
-				reloadPage(window);
-			}
-			
-		},"json");
-		
-	}
-	function avatar_upload(obj){
-		var $fileinput=$(obj);
-		/* $(obj)
-		.show()
-		.ajaxComplete(function(){
-			$(this).hide();
-		}); */
-		Wind.css("jcrop");
-		Wind.use("ajaxfileupload","jcrop","noty",function(){
-			$.ajaxFileUpload({
-				url:"{:U('profile/avatar_upload')}",
-				secureuri:false,
-				fileElementId:"avatar_uploder",
-				dataType: 'json',
-				data:{},
-				success: function (data, status){
-					if(data.status==1){
-						$("#avatar_uploder").hide();
-						var $uploaded_area=$(".uploaded_avatar_area");
-						$uploaded_area.find("img").remove();
-						var $img=$("<img/>").attr("src","__UPLOAD__avatar/"+data.data.file);
-						$img.prependTo($uploaded_area);
-						$(".uploaded_avatar_btns").show();
-						$img.Jcrop({
-					    	aspectRatio:1/1,
-					    	setSelect: [ 0, 0, 100, 100 ],
-					    	onSelect: function(c){
-					    		$img.data("area",c);
-					    	}
-					    });
-						
-					}else{
-						noty({text: data.info,
-                    		type:'error',
-                    		layout:'center'
-                    	});
-					}
-					
-				},
-				error: function (data, status, e){}
-			});
-		});
-		
-		
-		
-		return false;
-	}
+                }, "json");
+    }
+    function avatar_upload(obj) {
+        var $fileinput = $(obj);
+        /* $(obj)
+         .show()
+         .ajaxComplete(function(){
+         $(this).hide();
+         }); */
+        Wind.css("jcrop");
+        Wind.use("ajaxfileupload", "jcrop", "noty", function () {
+            $.ajaxFileUpload({
+                url: "{:U('profile/avatar_upload')}",
+                secureuri: false,
+                fileElementId: "avatar_uploder",
+                dataType: 'json',
+                data: {},
+                success: function (data, status) {
+                    if (data.status == 1) {
+                        $("#avatar_uploder").hide();
+                        var $uploaded_area = $(".uploaded_avatar_area");
+                        $uploaded_area.find("img").remove();
+                        var $img = $("<img/>").attr("src", "__UPLOAD__avatar/" + data.data.file);
+                        $img.prependTo($uploaded_area);
+                        $(".uploaded_avatar_btns").show();
+                        $img.Jcrop({
+                            aspectRatio: 1 / 1,
+                            setSelect: [0, 0, 100, 100],
+                            onSelect: function (c) {
+                                $img.data("area", c);
+                            }
+                        });
+                    } else {
+                        noty({
+                            text: data.info,
+                            type: 'error',
+                            layout: 'center'
+                        });
+                    }
+                },
+                error: function (data, status, e) {
+                }
+            });
+        });
+        return false;
+    }
 </script>
 </body>
 </html>
