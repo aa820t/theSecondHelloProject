@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-10-17 00:29:47
+Date: 2016-10-23 22:09:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -638,7 +638,7 @@ CREATE TABLE `ms_options` (
 -- Records of ms_options
 -- ----------------------------
 INSERT INTO `ms_options` VALUES ('1', 'member_email_active', '{\"title\":\"ThinkCMF\\u90ae\\u4ef6\\u6fc0\\u6d3b\\u901a\\u77e5.\",\"template\":\"<p>\\u672c\\u90ae\\u4ef6\\u6765\\u81ea<a href=\\\"http:\\/\\/www.thinkcmf.com\\\">ThinkCMF<\\/a><br\\/><br\\/>&nbsp; &nbsp;<strong>---------------<strong style=\\\"white-space: normal;\\\">---<\\/strong><\\/strong><br\\/>&nbsp; &nbsp;<strong>\\u5e10\\u53f7\\u6fc0\\u6d3b\\u8bf4\\u660e<\\/strong><br\\/>&nbsp; &nbsp;<strong>---------------<strong style=\\\"white-space: normal;\\\">---<\\/strong><\\/strong><br\\/><br\\/>&nbsp; &nbsp; \\u5c0a\\u656c\\u7684<span style=\\\"FONT-SIZE: 16px; FONT-FAMILY: Arial; COLOR: rgb(51,51,51); LINE-HEIGHT: 18px; BACKGROUND-COLOR: rgb(255,255,255)\\\">#username#\\uff0c\\u60a8\\u597d\\u3002<\\/span>\\u5982\\u679c\\u60a8\\u662fThinkCMF\\u7684\\u65b0\\u7528\\u6237\\uff0c\\u6216\\u5728\\u4fee\\u6539\\u60a8\\u7684\\u6ce8\\u518cEmail\\u65f6\\u4f7f\\u7528\\u4e86\\u672c\\u5730\\u5740\\uff0c\\u6211\\u4eec\\u9700\\u8981\\u5bf9\\u60a8\\u7684\\u5730\\u5740\\u6709\\u6548\\u6027\\u8fdb\\u884c\\u9a8c\\u8bc1\\u4ee5\\u907f\\u514d\\u5783\\u573e\\u90ae\\u4ef6\\u6216\\u5730\\u5740\\u88ab\\u6ee5\\u7528\\u3002<br\\/>&nbsp; &nbsp; \\u60a8\\u53ea\\u9700\\u70b9\\u51fb\\u4e0b\\u9762\\u7684\\u94fe\\u63a5\\u5373\\u53ef\\u6fc0\\u6d3b\\u60a8\\u7684\\u5e10\\u53f7\\uff1a<br\\/>&nbsp; &nbsp; <a title=\\\"\\\" href=\\\"http:\\/\\/#link#\\\" target=\\\"_self\\\">http:\\/\\/#link#<\\/a><br\\/>&nbsp; &nbsp; (\\u5982\\u679c\\u4e0a\\u9762\\u4e0d\\u662f\\u94fe\\u63a5\\u5f62\\u5f0f\\uff0c\\u8bf7\\u5c06\\u8be5\\u5730\\u5740\\u624b\\u5de5\\u7c98\\u8d34\\u5230\\u6d4f\\u89c8\\u5668\\u5730\\u5740\\u680f\\u518d\\u8bbf\\u95ee)<br\\/>&nbsp; &nbsp; \\u611f\\u8c22\\u60a8\\u7684\\u8bbf\\u95ee\\uff0c\\u795d\\u60a8\\u4f7f\\u7528\\u6109\\u5feb\\uff01<br\\/><br\\/>&nbsp; &nbsp; \\u6b64\\u81f4<br\\/>&nbsp; &nbsp; ThinkCMF \\u7ba1\\u7406\\u56e2\\u961f.<\\/p>\"}', '1');
-INSERT INTO `ms_options` VALUES ('6', 'site_options', '{\"site_name\":\"\\u4f1a\\u5458\\u7cfb\\u7edf\",\"site_admin_url_password\":\"\",\"site_tpl\":\"membersystem\",\"site_adminstyle\":\"bluesky\",\"site_icp\":\"\",\"site_admin_email\":\"admin@admin.com\",\"site_tongji\":\"\",\"site_copyright\":\"\",\"site_seo_title\":\"\\u4f1a\\u5458\\u7cfb\\u7edf\",\"site_seo_keywords\":\"\\u4f1a\\u5458\\u7cfb\\u7edf\",\"site_seo_description\":\"\\u4f1a\\u5458\\u7cfb\\u7edf\",\"urlmode\":\"0\",\"html_suffix\":\"\",\"comment_time_interval\":\"60\"}', '1');
+INSERT INTO `ms_options` VALUES ('6', 'site_options', '{\"site_name\":\"\\u4f1a\\u5458\\u7cfb\\u7edf\",\"site_admin_url_password\":\"\",\"site_tpl\":\"simplebootx\",\"site_adminstyle\":\"bluesky\",\"site_icp\":\"\\u4eacICP\\u590713033158\",\"site_admin_email\":\"admin@admin.com\",\"site_tongji\":\"\",\"site_copyright\":\"CopyRight\\u00a92014  AllMobilize Inc.\",\"site_seo_title\":\"\\u4f1a\\u5458\\u7cfb\\u7edf\",\"site_seo_keywords\":\"\\u4f1a\\u5458\\u7cfb\\u7edf\",\"site_seo_description\":\"\\u4f1a\\u5458\\u7cfb\\u7edf\",\"urlmode\":\"0\",\"html_suffix\":\"\",\"comment_time_interval\":\"60\"}', '1');
 INSERT INTO `ms_options` VALUES ('7', 'cmf_settings', '{\"banned_usernames\":\"\"}', '1');
 INSERT INTO `ms_options` VALUES ('8', 'cdn_settings', '{\"cdn_static_root\":\"\"}', '1');
 
@@ -873,13 +873,14 @@ CREATE TABLE `ms_users` (
   PRIMARY KEY (`id`),
   KEY `user_login_key` (`user_login`),
   KEY `user_nicename` (`user_nicename`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of ms_users
 -- ----------------------------
-INSERT INTO `ms_users` VALUES ('1', 'admin', '###5bef15da86bbb43d928e79946f94ef02', 'admin', 'admin@admin.com', '', null, '0', null, null, '127.0.0.1', '2016-10-15 22:35:13', '2016-10-15 09:55:04', '', '1', '0', '1', '0', '');
-INSERT INTO `ms_users` VALUES ('2', 'aa820t_126_com', '###4f793aab45a558f08f18bf05f7316184', 'aa820t_126_com', 'aa820t@126.com', '', null, '0', null, null, '127.0.0.1', '2016-10-15 22:49:18', '2016-10-15 22:27:34', '', '1', '0', '2', '0', '');
+INSERT INTO `ms_users` VALUES ('1', 'admin', '###5bef15da86bbb43d928e79946f94ef02', 'admin', 'admin@admin.com', '', null, '0', null, null, '127.0.0.1', '2016-10-21 17:52:22', '2016-10-15 09:55:04', '', '1', '0', '1', '0', '');
+INSERT INTO `ms_users` VALUES ('2', 'aa820t_126_com', '###4f793aab45a558f08f18bf05f7316184', 'aa820t_126_com', 'aa820t@126.com', '', 'avatar/580b9a8e79ee0.jpg', '1', '2016-09-28', null, '127.0.0.1', '2016-10-22 22:25:15', '2016-10-15 22:27:34', '04642f67cb6dece942ff268d6bd8cc33', '1', '0', '2', '0', '');
+INSERT INTO `ms_users` VALUES ('3', 'aa820t_qq_com', '###4f793aab45a558f08f18bf05f7316184', 'aa820t_qq_com', 'aa820t@qq.com', '', null, '0', null, null, '127.0.0.1', '2016-10-21 21:06:55', '2016-10-21 21:06:55', '', '1', '0', '2', '0', '');
 
 -- ----------------------------
 -- Table structure for ms_user_favorites

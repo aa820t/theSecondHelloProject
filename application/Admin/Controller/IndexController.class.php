@@ -24,7 +24,6 @@ class IndexController extends AdminbaseController {
        	$this->display();
         
     }
-    
     private function load_menu_lang(){
         if (!C('LANG_SWITCH_ON',null,false)) return;
         $default_lang=C('DEFAULT_LANG');

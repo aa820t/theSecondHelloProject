@@ -102,8 +102,7 @@ class MenuModel extends CommonModel {
                 }
                    
             }
-        } 
-        
+        }
         return $array;
     }
 
@@ -215,7 +214,6 @@ class MenuModel extends CommonModel {
      */
     public function get_menu_tree($parentid=0){
     	$menus=$this->where(array("parentid"=>$parentid))->order(array("listorder"=>"ASC"))->select();
-    	
     	if($menus){
     		foreach ($menus as $key=>$menu){
     			$children=$this->get_menu_tree($menu['id']);
